@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="col-md-10 col-md-offset-1">
+
+            <h3 class="dish-title">{{ dish.title }}</h3>
+            <p class="dish-desc">{{ dish.description }}</p>
+            <img class="dish-img" src="{{ dish.photo.url }}"></img>
+            <span class="dish-price">{{ dish.price }} &#8372</span>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <div class="container">
+        <div class="row">
+            <form name="addCategory" id="addcatForm" novalidate action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Название категории: {{ form.title }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Номер категории: {{ form.category_order }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Видимо: {{ form.is_visible }}</p>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                        <p>От шефа: {{ form.is_special }}</p>
+                    </div>
+                </div>
+                <button type="submit" name="category_but" class="btn btn-primary btn-lg">Добавить категорию</button>
+            </form>
+        </div>
+    </div>
+
+{% endif %}
+{% endblock %}

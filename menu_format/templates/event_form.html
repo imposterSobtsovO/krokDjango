@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if 'manager' in user.groups.all.0.name or user.is_staff %}
+    <div class="container">
+        <div class="row">
+            <form name="addCategory" id="addcatForm" novalidate action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Название мероприятия: {{ form.title }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Фото: {{ form.photo }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Описание: {{ form.description }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Дата: {{ form.event_date }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Время: {{ form.event_time }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>Цена: {{ form.price }}</p>
+                    </div>
+                </div>
+
+
+
+                <button type="submit" name="category_but" class="btn btn-primary btn-lg">Добавить мероприятие</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% endblock %}

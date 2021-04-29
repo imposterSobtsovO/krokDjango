@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <section id="banners">
+
+                <div class="slider">
+                    <div class="slider__wrapper">
+                        <div class="slider__items">
+                            {% for item in banners %}
+                                <div class="slider__item">
+                                    <img src="{{ item.photo.url }}" title="{{ item.title }}" height="400px" width="100%"></img>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <a class="slider__control slider__control_prev" href="#" role="button"></a>
+                    <a class="slider__control slider__control_next" href="#" role="button"></a>
+                </div>
+
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+
+
+            </div>
+        </div>
+    </section>
+    <section id="special_menu">
+        <h1 class="h1">Меню от шефа</h1>
+        <div class="container">
+            <div class="row">
+                {% for item in special_categories %}
+                    <div style="width: 45%">
+                        <h2>{{ item.title }}</h2>
+                         {% for dish in item.dishes %}
+                             <div  class="card bg-secondary">
+
+                                <div class="card-body">
+
+                                    <a href="/menu/{{ dish.pk }}" style="text-decoration: none;"><h3 class="card-title">{{ dish.title }}</h3></a>
+
+                                    <span class="card-price">{{ dish.price }} &#8372</span>
+                                </div>
+                             </div>
+                         {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <section id="menu">
+        <h1 class="h1">Меню</h1>
+        <div class="container">
+            <div class="row">
+                {% for item in categories %}
+                    <div style="width: 45%">
+                        <h2>{{ item.title }}</h2>
+                         {% for dish in item.dishes %}
+                             <div class="card bg-secondary">
+                             <div class="card-body">
+
+                                    <a href="/menu/{{ dish.pk }}" style="text-decoration: none;"><h3 class="card-title">{{ dish.title }}</h3></a>
+                                    <span class="card-price">{{ dish.price }} &#8372</span>
+                             </div>
+                             </div>
+                         {% endfor %}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    <section id="events">
+    <h1 class="h1">Мероприятия</h1>
+          <div class="slider__events">
+
+            <div class="slider__events__wrapper">
+
+                <div class="slider__events__items">
+
+                {% for item in events %}
+
+                   <div class="slider__events__item">
+                        <span class="slider__events__item_inner">
+                            <span class="slider__events__item_img">
+                                <img class="slider__events__item_img" src="{{ item.photo.url }}" alt=""></img>
+                            </span>
+                            <span class="slider__events__item_testimonial">
+                                <span class="slider__events__item_name">{{ item.title }}</span>
+                                <span class="slider__events__item_post">{{ item.event_date|date:"d.m"|lower}} {{ item.event_time|time:"H:i"| lower}}</span>
+                                <span class="slider__events__item_text">{{ item.description }}</span>
+                                <span class="slider__events__item_action">
+                                    <a class="btn__events" href="#">Купить за {{ item.price }} &#8372</a>
+                                </span>
+                            </span>
+                        </span>
+
+                   </div>
+
+                {% endfor %}
+
+                </div>
+
+            </div>
+                <a class="slider__events__control slider__events__control_prev" href="#" role="button"></a>
+                <a class="slider__events__control slider__events__control_next" href="#" role="button"></a>
+          </div>
+    </section>
+
+    <section id="reservation">
+
+        <div class="container">
+            <div class="row">
+                <form name="sendMessage" id="contactForm" novalidate action="" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.user_name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.user_email }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.message }}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Отправить сообщение</button>
+                </form>
+            </div>
+        </div>
+
+    </section>
+{% endblock %}
